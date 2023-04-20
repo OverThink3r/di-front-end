@@ -1,18 +1,38 @@
-import {Route, Routes} from "react-router-dom";
-import {LoginPage} from "../pages";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {BooksPage, LoginPage, UsersPage} from "../pages";
+import {LoadingSection, Navbar} from "../share";
+import {AuthRoutes} from "./AuthRoutes";
+import {UsersBooksRoutes} from "./UsersBooksRoutes";
+import {useAuth} from "../hooks";
+import {useEffect} from "react";
 
 export const AppRouter = () => {
 
-  const authStatus = 'not-authenticated'
+  const {status, checkAuthToken} = useAuth()
+
+  useEffect(() => {
+    checkAuthToken()
+  }, []);
+
+  if (status == 'checking'){
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <LoadingSection />
+      </div>
+    )
+  }
 
   return (
-    <Routes>
-{/*
+    <>
       {
-        (authStatus === 'not-authenticated')
+        (status === 'authenticated')
+        ? (
+            <UsersBooksRoutes />
+        )
+        : (
+          <AuthRoutes />
+          )
       }
-*/}
-      <Route path="/auth/*" element={<LoginPage />} />
-    </Routes>
+    </>
   );
 };

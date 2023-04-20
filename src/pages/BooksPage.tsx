@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
 import {useBooksAPI} from "../hooks";
-import {LoadingSection} from "../share";
+import {LoadingSection, Navbar} from "../share";
 import {BookModal, BooksTable} from "../components/books";
+import {useSelector} from "react-redux";
 
 export const BooksPage = () => {
 
-  const {getBooks, books, loadingBooks} = useBooksAPI()
-
+  const {getBooks,  loadingBooks} = useBooksAPI()
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const {booksArray: books} = useSelector((state) => state.books)
 
   useEffect(() => {
     getBooks()

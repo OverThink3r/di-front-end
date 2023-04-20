@@ -2,17 +2,21 @@ import {useState} from "react";
 import {BookApiInterface} from "../interfaces/BookInterface";
 import {diAPI} from "../api/di-api";
 import {BookFormValues} from "../interfaces";
+import {useDispatch} from "react-redux";
+import {updateBooks} from "../store/modal/booksSlice";
 
 export const useBooksAPI = () => {
   const [books, setBooks] = useState<BookApiInterface[]>([])
   const [loadingBooks, setLoadingBooks] = useState<boolean>(false)
   const [isSavingBook, setIsSavingBook] = useState<boolean>(false)
+  const dispatch = useDispatch()
 
   const getBooks = async () => {
     setLoadingBooks(true)
     const { data: {books} } = await diAPI.get('/books')
     setBooks(books)
     setLoadingBooks(false)
+    dispatch(updateBooks(books))
   }
 
   const saveBook = async (bookData: BookFormValues) => {
@@ -27,11 +31,12 @@ export const useBooksAPI = () => {
       await diAPI.post('/books/', {...bookData})
     }
     setIsSavingBook(false)
+    await getBooks()
   }
 
   const deleteBook = async (bookId: number) => {
     const {data} = await diAPI.delete(`/books/${bookId}`)
-    console.log(data)
+    await getBooks()
   }
 
 

@@ -20,7 +20,6 @@ export const BookForm = ( {initValues, closeModal}: Props ) => {
   if (! initValues){
     initValues = defaultInitValues
   }
-  console.log(initValues.release_date)
   const {saveBook, isSavingBook} = useBooksAPI()
 
   const onFormSubmit = async (bookData: BookFormValues) => {

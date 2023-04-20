@@ -1,9 +1,12 @@
 import {useState} from "react";
 import {NavLink} from "react-router-dom";
-import {GiHamburgerMenu} from "react-icons/all";
+import {FaDoorOpen, GiHamburgerMenu} from "react-icons/all";
+import {useSelector} from "react-redux";
+import {useAuth} from "../hooks";
 
 export const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const {startLogout} = useAuth()
     return (
       <nav className="relative flex flex-wrap items-center justify-evenly px-2 py-3 bg-orange-500 mb-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -46,6 +49,14 @@ export const Navbar = () => {
                 >
                   <span>Libros</span>
                 </NavLink>
+              </li>
+              <li className="nav-item">
+                <span
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 cursor-pointer"
+                  onClick={startLogout}
+                >
+                  Salir
+                </span>
               </li>
             </ul>
           </div>

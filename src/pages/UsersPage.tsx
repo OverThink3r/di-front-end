@@ -1,7 +1,7 @@
 import {useUsersAPI} from "../hooks";
 import {useEffect} from "react";
 import {UsersTable} from "../components/users";
-import {LoadingSection} from "../share";
+import {LoadingSection, Navbar} from "../share";
 
 export const UsersPage = () => {
 

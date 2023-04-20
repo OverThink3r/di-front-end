@@ -1,6 +1,6 @@
 export const LoadingSection = () => {
   return (
-    <div>
+    <div className="w-1/2 mx-auto">
       <h3 className="text-3xl text-center">Cargando Información...</h3>
       <h4 className="text-sm text-center mb-5">Por favor espere</h4>
       <div className="flex justify-center">

@@ -5,17 +5,19 @@ export const authSlice = createSlice({
   initialState: {
     userName: '',
     status: 'checking',
-    token: ''
   },
   reducers: {
-    login: (state, action) => {
-
+    login: (state, {payload}) => {
+      state.status = 'authenticated'
+      state.userName = payload
     },
-    logout: (state, action) => {
-
+    logout: (state) => {
+      state.status = 'not-authenticated'
+      state.userName = ''
     },
-    checkingCredentials: (state, action) => {
-
+    checkingCredentials: (state) => {
+      state.status = 'checking'
+      state.userName = ''
     }
   }
 })
@@ -23,5 +25,5 @@ export const authSlice = createSlice({
 export const {
   login,
   logout,
-  checkingCredentials
+  checkingCredentials,
 } = authSlice.actions
