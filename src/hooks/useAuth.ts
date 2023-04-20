@@ -28,6 +28,7 @@ export const useAuth = () => {
     try {
       dispatch(checkingCredentials())
       const {data} = await diAPI.post('/auth/register', credentials)
+      dispatch(logout())
       return data.ok
     } catch (e) {
       dispatch(logout())
