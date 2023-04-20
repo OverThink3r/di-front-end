@@ -8,7 +8,7 @@ export const BooksPage = () => {
 
   const {getBooks,  loadingBooks} = useBooksAPI()
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const {booksArray: books} = useSelector((state) => state.books)
+  const {booksArray: books} = useSelector((state: any) => state.books)
 
   useEffect(() => {
     getBooks()
